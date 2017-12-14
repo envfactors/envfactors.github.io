@@ -1,1 +1,226 @@
-Hello World
+<html>
+<head>
+<title>Environmental Factors in Indoor Navigation: CHI 2018</title>
+<link rel="stylesheet" href="mystyle.css">
+<meta name="keywords" content="blind,accessibility,indoor navigation,trajectory, turn-by-turn navigation, mobile sensors,activity recognition,dataset">
+
+</head>
+
+<body>
+<center>
+<h1>Environmental Factors in Indoor Navigation Based on Real-World Trajectories of Blind Users</h1>
+<img src="images/Fig1.png" width="100" height="100"/>
+<h2>Understanding trajectory variability across users and deviation</h2>
+
+<td>Jump to:</td>
+<td><a href="#description">Dataset description</a></td>
+<td><a href="#collection">How was the data collected?</a></td>
+<td><a href="#download">Download</a></td>
+<td><a href="#tutorial">Tutorial and Code</a></td>
+<td><a href="#papers">Relevant papers</a></td>
+
+</tr>
+</table>
+
+</center>
+
+
+<p>
+<ul>
+<li>Trajectories of blind users in real-world settings.</li>
+<li>Contextual information, including floorplan map, obstacles and surrounding objects, and instructions type.</li>
+<li>Estimated and annotated ground truth position in order to test scalability of approaches.</li>
+<li>Publicly available dataset and code.</li>
+</ul>
+
+<table width="100%">
+<tr>
+<td>
+This dataset was collected in <br/>
+Robotics Institute, Carnegie Mellon University.<br/>
+Publication: <a href="#paper">
+
+@INPROCEEDINGS{Kacorri2018CHI,
+  author = {Hernisa Kacorri and Eshed Ohn-Bar and Kris Kitani and Chieko Asakawa},
+  title = {Environmental Factors in Indoor Navigation Based on Real-World Trajectories of Blind Users},
+  booktitle = {CHI},
+  year = {2018}
+}
+
+</a>.
+</td>
+
+</tr>
+</table>
+</p>
+
+<hr/>
+<a name="description"/>
+<h2>Dataset description:</h2>
+<p>
+The dataset contains data from ...
+</p>
+
+<p>
+<b>User Statistics:</b><br/>
+
+</table>
+</p>
+
+<hr/>
+<a name="collection"/>
+<h2>How was the data collected?</h2>
+<p>
+Data was collected </p>
+
+
+<hr/>
+<a name="download"/>
+<h2>Download the dataset:</h2>
+If you use the dataset please cite...
+
+<ol>
+<li><b>Data Format</b>.<br/>
+</li>
+
+<li><b>Cross validation</b>.<br/>
+</li>
+
+</ol>
+
+
+<hr/>
+<a name="tutorial"/>
+<h2>Tutorial:</h2>
+To help you get familiar and comfortable with the dataset, we provide a tutorial, with Python code, in the form of an i-Python notebook:<br/>
+<a href="intro2extrasensory/intro2extrasensory.ipynb" onclick="ga('send', {hitType: 'event', eventCategory: 'intro2extrasensory.ipynb', eventAction: 'click', eventLabel: 'tutorial'});">Download the tutorial in i-Python notebook</a>.<br/>
+Alternatively, you can view the output of the notebook as a document, in the following page:<br/>
+<a href="intro2extrasensory/intro2extrasensory.html" onclick="ga('send', {hitType: 'event', eventCategory: 'intro2extrasensory.html', eventAction: 'click', eventLabel: 'tutorial'});">Introduction to ExtraSensory (html version)</a>.
+
+<p>
+View <a href="https://youtu.be/2cuhvEQZ_sI" target="_blank">this lecture</a> by Yonatan Vaizman for an introduction to <b>Behavioral Context Recognition</b> and specifically to the ExtraSensory App and the ExtraSensory Dataset.
+</p>
+
+<hr/>
+<a name="open_problems"/>
+<h2>Open problems:</h2>
+<p>
+The ExtraSensory Dataset enables research and development of algorithms and comparison of solutions to many problems, related to behavioral context recognition.
+Here are some of the related problems, some of them were addressed in our papers, others remain open for you to solve:
+</p>
+
+<table border="1pt">
+<col width="15%"/>
+<col width="85%"/>
+
+<tr>
+<td><b>Sensor fusion</b></td>
+<td>The dataset has features (and raw measurements) from sensors of diverse modalities, from the phone and from the watch.<br/>
+In <a href="#paper.Vaizman2017a">Vaizman2017a (referenced below)</a>, we compared different approaches to fuse information from the different sensors,
+namely early-fusion (concatenation of features) and late-fusion (averaging or weighted averaging of probability outputs from 6 single-sensor classifiers).
+</td>
+</tr>
+
+<tr>
+<td><b>Multi-task modeling</b></td>
+<td>
+The general context-recognition task in the ExtraSensory Dataset is a multi-label task, where at any minute the behavioral context can be described by a combination of relevant context-labels.<br/>
+In <a href="#paper.Vaizman2017b">Vaizman2017b (referenced below)</a>, we compared the basline system of separate model-per-label with a multi-task MLP that outputs probabilities for 51 labels.
+We showed the advantage of sharing parameters in a unified model. Specifically, an MLP with narrow hidden layers can be richer than a linear model, while having fewer parameters, thus reducing over-fitting.<br/>
+Perhaps other methods can also successfully model many diverse context-labels in a unified model.
+</td>
+</tr>
+
+<tr>
+<td><b>Absolute location</b></td>
+<td>
+The ExtraSensory Dataset includes location coordinates for many examples.
+So far, in our papers, we only extracted <i>relative location</i> features - capturing how much a person moves around in space within each minute.<br/>
+We did not address utilizing the <i>absolute location</i> data. There may be useful information in addressing the movement from minute to minute, and incorporating GIS data and geographic landmarks.<br/>
+</td>
+</tr>
+
+<tr>
+<td><b>Time series modeling</b></td>
+<td>
+The models we suggested so far treat each example (minute) as independent of the others.<br/>
+There's a lot of work to be done on modeling minute-by-minute time series, smoothing the recognition over minutes, and ways to segment time into meaningful "behavioral events".
+</td>
+</tr>
+
+<tr>
+<td><b>More sensing modalities</b></td>
+<td>
+The dataset includes occasional measurements from sensors that we did not yet utilize in our experiments,
+including magnetometer, ambient light, air pressure, humidity, temperature, and watch-compass.
+</td>
+</tr>
+
+<tr>
+<td><b>Semi-supervised learning</b></td>
+<td>
+The ability to improve a model with plenty unlabeled examples will enable collecting huge amounts of data with little effort (less self-reporting).
+</td>
+</tr>
+
+<tr>
+<td><b>Active learning</b></td>
+<td>
+Active learning will make future data collections easier on participants -
+instead of asking for labels for many examples, the system can sparsely prompt the user for labels in the most critical examples.
+</td>
+</tr>
+
+<tr>
+<td><b>User adaptation</b></td>
+<td>
+In <a href="#paper.Vaizman2017a">Vaizman2017a (referenced below)</a>, we demonstrated the potential improvement of context-recognition with a few days of labeled data from a new users.<br/>
+Can you achieve successful user-adaptation <i>without labels</i> from the new user?
+</td>
+</tr>
+
+<tr>
+<td><b>Feature learning</b></td>
+<td>
+All our experiments were done with designed features, using traditional DSP methods.<br/>
+Feature learning can potentially extract meaningful information from the sensor measurements that the designed features miss.<br/>
+The dataset includes the full raw measurements from the sensors and enables experimenting with feature learning.
+</td>
+</tr>
+
+
+<tr>
+<td><b>Privacy</b></td>
+<td>
+The ExtraSensory Dataset can be a testbed to compare methods for privacy-preserving.
+</td>
+</tr>
+
+</table>
+
+
+<hr/>
+<a name="papers"/>
+<h2>Relevant papers:</h2>
+
+<table border="1" rules="rows" class="papers">
+<col width="10%"/>
+<col width="80%"/>
+<col width="10%"/>
+
+<tr>
+<a name="paper.1"/>
+<td>aaa</td>
+<td><table><tr><td><b>Asakawa. "navcog". <i>w4a</i>, </b></td></tr>
+</td></tr></table></td>
+<td>
+</tr>
+
+</table>
+<p/>
+<hr/>
+<center>
+</center>
+
+</body>
+</html>
